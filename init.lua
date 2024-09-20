@@ -927,6 +927,29 @@ require('lazy').setup({
       { '<leader>lg', '<cmd>LazyGit<cr>', desc = '[L]azy[G]it' },
     },
   },
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    config = function()
+      require('toggleterm').setup {
+        -- other options can be added here
+        float_opts = {
+          border = 'curved', -- customize the border style
+        },
+        -- Set defaults for vertical terminals
+        size = 80, -- Adjust this value to set the width of the vertical terminal
+        direction = 'vertical',
+      }
+
+      -- Set the key mapping for toggling terminal in float mode
+      vim.keymap.set('n', '<leader>st', '<cmd>ToggleTerm direction=float<CR>', { noremap = true, silent = true, desc = 'Toggle [S]t Terminal (Float)' })
+
+      -- Set the key mapping for toggling terminal in vertical mode
+      vim.keymap.set('n', '<leader>sv', '<cmd>ToggleTerm direction=vertical<CR>', { noremap = true, silent = true, desc = 'Toggle [S]v Terminal (Vertical)' })
+
+      vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n><C-w>p]], { noremap = true, silent = true, desc = 'Exit terminal mode and move to previous window' })
+    end,
+  },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
