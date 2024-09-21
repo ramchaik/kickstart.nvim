@@ -13,10 +13,10 @@ return {
     }
 
     -- Set the key mapping for toggling terminal in float mode
-    vim.keymap.set('n', '<leader>st', '<cmd>ToggleTerm direction=float<CR>', { noremap = true, silent = true, desc = 'Toggle [S]t Terminal (Float)' })
+    vim.keymap.set('n', '<leader>stt', '<cmd>ToggleTerm direction=float<CR>', { noremap = true, silent = true, desc = 'Toggle [S]t Terminal (Float)' })
 
     -- Set the key mapping for toggling terminal in vertical mode
-    vim.keymap.set('n', '<leader>sv', '<cmd>ToggleTerm direction=vertical<CR>', { noremap = true, silent = true, desc = 'Toggle [S]v Terminal (Vertical)' })
+    vim.keymap.set('n', '<leader>stv', '<cmd>ToggleTerm direction=vertical<CR>', { noremap = true, silent = true, desc = 'Toggle [S]v Terminal (Vertical)' })
 
     vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n><C-w>p]], { noremap = true, silent = true, desc = 'Exit terminal mode and move to previous window' })
   end,
