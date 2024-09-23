@@ -383,11 +383,17 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          -- Include hidden files in the search
+          hidden = true,
+
+          -- Exclude .git directories from the search
+          file_ignore_patterns = { '.git/' },
+
+          -- mappings = {
+          --   i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+          -- },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
@@ -404,7 +410,13 @@ require('lazy').setup({
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sf', function()
+        require('telescope.builtin').find_files {
+          hidden = true,
+          no_ignore = false,
+          file_ignore_patterns = { '.git/' },
+        }
+      end, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -837,6 +849,13 @@ require('lazy').setup({
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'tokyonight-night'
+
+      -- Set transparency using vim.cmd
+      vim.cmd 'hi Normal guibg=NONE ctermbg=NONE'
+      vim.cmd 'hi NormalFloat guibg=NONE ctermbg=NONE'
+      vim.cmd 'hi LineNr guibg=NONE ctermbg=NONE'
+      vim.cmd 'hi SignColumn guibg=NONE ctermbg=NONE'
+      vim.cmd 'hi EndOfBuffer guibg=NONE ctermbg=NONE'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
