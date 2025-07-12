@@ -93,6 +93,25 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
+-- ============================================================================
+-- CONDITIONAL CONFIGURATION LOADING
+-- ============================================================================
+
+if vim.g.vscode then
+  -- Running inside VSCode - load minimal VSCode-specific config
+  print("Loading VSCode-Neovim configuration...")
+  require('nvim-vscode')
+
+  -- Early return to skip all the plugin loading for VSCode
+  return
+end
+
+-- ============================================================================
+-- REGULAR NEOVIM CONFIGURATION (when not in VSCode)
+-- ============================================================================
+
+print("Loading regular Neovim configuration...")
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
