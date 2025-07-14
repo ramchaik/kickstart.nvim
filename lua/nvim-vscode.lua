@@ -43,10 +43,25 @@ vim.keymap.set("n", "<leader>e", vscode_call("workbench.view.explorer"), { desc 
 vim.keymap.set("n", "<leader>p", vscode_call("workbench.action.showCommands"), { desc = "Command palette" })
 
 -- Find files
-vim.keymap.set("n", "<leader>f", vscode_call("workbench.action.quickOpen"), { desc = "Find files" })
+vim.keymap.set("n", "<leader>ff", vscode_call("workbench.action.quickOpen"), { desc = "Find files" })
 
--- Global search
-vim.keymap.set("n", "<leader>g", vscode_call("workbench.action.findInFiles"), { desc = "Global search" })
+-- Global search word
+vim.keymap.set("n", "<leader>fw", vscode_call("workbench.action.findInFiles"), { desc = "Global search" })
+
+-- Source control
+vim.keymap.set("n", "<leader>gg", function()
+  -- Always create a new terminal for lazygit
+  vscode.call("workbench.action.terminal.new")
+  vim.defer_fn(function()
+    vscode.call("workbench.action.terminal.sendSequence", {
+      args = { text = "lazygit\r" }
+    })
+  end, 100)
+end, { desc = "Open lazygit" })
+vim.keymap.set("n", "<leader>gs", vscode_call("workbench.view.scm"), { desc = "Git source control" })
+
+-- Debug tab
+vim.keymap.set("n", "<leader>db", vscode_call("workbench.view.debug"), { desc = "Debug panel" })
 
 -- ============================================================================
 -- WINDOW MANAGEMENT
@@ -94,7 +109,7 @@ vim.keymap.set("n", "<leader>a", vscode_call("editor.action.quickFix"), { desc =
 -- Error navigation
 vim.keymap.set("n", "]d", vscode_call("editor.action.marker.next"), { desc = "Next diagnostic" })
 vim.keymap.set("n", "[d", vscode_call("editor.action.marker.prev"), { desc = "Previous diagnostic" })
-vim.keymap.set("n", "<leader>d", vscode_call("workbench.actions.view.problems"), { desc = "Show problems" })
+vim.keymap.set("n", "<leader>dp", vscode_call("workbench.actions.view.problems"), { desc = "Show problems" })
 
 -- ============================================================================
 -- EDITING
